@@ -25,7 +25,7 @@ Once you access to the module you will see the interface containing all the curr
 
 The interface contains a group of tools which will help you to locate, modify and create new elements as well as you will be able to remove entries by using the proper controls created for it.
 
-The search system comes with the Mark plugin as well as some custom others which performs a basic string search and filter every time you enter a value in the search box or presses the filter buttons right next to the labels.
+The search system comes with the Mark plugin as well as some custom others which performs a basic string search and filter every time you enter a value in the search box or press the filter buttons right next to the labels.
 
 
 The MASTER file
