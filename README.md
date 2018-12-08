@@ -32,4 +32,4 @@ The search system comes with the Mark plugin as well as some custom others which
 
 The MASTER file
 ============================================================================
-Only the language declared as Master language will show the 'Add new element' control represented in the below image, which will allow you to create new entries that will be automatically propagated to the rest of language files once you access them to perform or declare the correspondent values in every single language.
+Only the language declared as Master language will show the 'Add new element' control, which will allow you to create new entries that will be automatically propagated to the rest of language files once you access them to perform or declare the correspondent values in every single language.
