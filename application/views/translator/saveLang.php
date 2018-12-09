@@ -2,7 +2,7 @@
 
 echo form_open('translator', '', $hidden );
 
-echo form_submit('ConfirmSaveLang', 'Confirmar', 'class="btn btn-success btn-block"');
+echo form_submit('ConfirmSaveLang', $this->lang->line('translate_confirm'), 'class="btn btn-success btn-block"');
 ?>
 <br />
 <table class="table table-stripped">
@@ -31,7 +31,7 @@ foreach ( $moduleData as $key => $line ) {
 
 <?php
 
-echo form_submit('ConfirmSaveLang', 'Confirmar', 'class="btn btn-success btn-block"');
+echo form_submit('ConfirmSaveLang', $this->lang->line('translate_confirm'), 'class="btn btn-success btn-block"');
 
 echo form_close();
 	
