@@ -41,6 +41,8 @@ class Translator extends CI_Controller {
 		$this->load->helper(array('form', 'url', 'file' ));
 		
 		$this->langDirs = array( BASEPATH . 'language', APPPATH . 'language' );
+		
+		$this->lang->load('translator_lang', 'english');
 
 		$this->data[ 'postUniquifier' ] = $this->postUniquifier;
 	
@@ -57,7 +59,7 @@ class Translator extends CI_Controller {
 	/**
 	 * Master language (directory name)
 	 */
-	var $masterLang = 'spanish';
+	var $masterLang = 'english';
 
 	/*------------- End Configuration ---------------*/
 
@@ -171,19 +173,19 @@ class Translator extends CI_Controller {
 				if ( $this->_translation_saved( $result ) ) {
 					$this->data['saved_data'] = $result;
 					$this->data['page_content'] = 'translator/confirmLangSaved';
-					$this->data['page_title'] = 'Cambios guardados';
+					$this->data['page_title'] = $this->lang->line('translate_changes_saved');
 				} else {
 					$this->data['page_content'] = 'translator/saveFailed';
-					$this->data['page_title'] = 'Se encontró un problema';
+					$this->data['page_title'] = $this->lang->line('translate_problem_found');
 				}
 			}
 			elseif ( $this->validated &&  $this->input->post('SaveLang') ) {
 				$this->data['page_content'] = 'translator/saveLang';
-				$this->data['page_title'] = '¿Confirmas los cambios?';
+				$this->data['page_title'] = $this->lang->line('translate_confirm_changes');
 			}
 			else {
 				$this->data['page_content'] = 'translator/translateLang';
-				$this->data['page_title'] = 'Traduciendo  ('.$this->slaveLang.'): ' . $this->langModule;
+				$this->data['page_title'] = $this->lang->line('translate_action') . '('.$this->slaveLang.'): ' . $this->langModule; 
 			}
 
 		}
@@ -235,24 +237,23 @@ class Translator extends CI_Controller {
 		if ( ! $this->langDir ) {
 			$this->data['langdirs'] = $this->langDirs;
 			$this->data['page_content'] = 'translator/selectLangDirectory';
-			$this->data['page_title'] = "Selecciona directorio de idioma";
+			$this->data['page_title'] = $this->lang->line('translate_lang_dir');
 		}		
 		elseif ( ! $this->masterLang ) {
 			$this->data['languages'] = $this->ListLanguages();
 			$this->data['page_content'] = 'translator/selectMasterLang';
-			$this->data['page_title'] = "Selecciona idioma principal";
+			$this->data['page_title'] = $this->lang->line('translate_master_language'); 
 		}		
 		elseif ( ! $this->input->post('slaveLang') ) {
-			// $this->data['languages'] = $this->_list_languages( $this->masterLang );
 			$this->data['languages'] = $this->_list_languages();
 			$this->data['page_content'] = 'translator/selectSlaveLang';
-			$this->data['page_title'] = "Selecciona idioma";
+			$this->data['page_title'] = $this->lang->line('translate_select_language');
 		}		
 		elseif ( ! $this->langModule ) {
 			$this->data['masterModules'] = $this->_list_modules( $this->masterLang );
 			$this->data['slaveModules'] = $this->_list_modules( $this->slaveLang );
 			$this->data['page_content'] = 'translator/selectModule';
-			$this->data['page_title'] = "Selecciona módulo de traducción (" . $this->slaveLang .")" ;
+			$this->data['page_title'] = $this->lang->line('translate_select_module') . " (" . $this->slaveLang .") "; 
 		}		
 		
 		return FALSE;
@@ -421,7 +422,7 @@ class Translator extends CI_Controller {
 			}
 
 			if ( ! $this->translations[ $key ][ 'master' ] ) {
-				$this->translations[ $key ][ 'note' ] = "Mismatch - does not exist in master translation";
+				$this->translations[ $key ][ 'note' ] = $this->lang->line('translate_mismatch'); //"Mismatch - does not exist in master translation";
 			}
 
 		}
@@ -440,17 +441,12 @@ class Translator extends CI_Controller {
 
 		if ( $this->_invalid_quotation_marks( $line ) ) {
 			$this->validated = FALSE;
-			return  "Invalid syntax - check for unbalanced quotation marks";
+			return  $this->lang->line('translate_invalid_syntax'); //"Invalid syntax - check for unbalanced quotation marks";
 		}
-
-		/*if ( mb_strlen( trim( $line ) ) == 0 ) {
-			$this->validated = FALSE;
-			return  "Entry cannot be blank. Defaulted to master translation.";
-		}*/
 		
 		if ( $this->_invalid_php_translation( $line ) ) {
 			$this->validated = FALSE;
-			return  "Invalid PHP syntax ";
+			return  $this->lang->line('translate_invalid_php_syntax'); //"Invalid PHP syntax ";
 		}
 
 		return NULL;

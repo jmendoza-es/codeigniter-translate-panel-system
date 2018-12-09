@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="language" content="spanish">
+<meta name="language" content="">
 <title><?php echo $page_title; ?></title>
 <!--
 <link rel=stylesheet href="/static/style.css" type="text/css" /><style type="text/css">
@@ -56,8 +56,8 @@ mark{
 <div class="jumbotron jumbotron-fluid">
 	<div class="container">
 	  <h1 class="display-4"><?php echo $page_title ?></h1>
-	  <p>Sistema interno de traducción, elige una de las siguientes opciones.</p>
-	  <?php if($page_title != "Selecciona idioma") { ?> <p><a class="btn btn-primary btn-lg" href="/translator" role="button">Cambiar idioma »</a></p> <?php } ?>
+	  <p><?php echo $this->lang->line('translate_app_description'); ?></p>
+	  <?php if($page_title != $this->lang->line('translate_select_language')) { ?> <p><a class="btn btn-primary btn-lg" href="/translator" role="button"><?php echo $this->lang->line('translate_switch_language'); ?> »</a></p> <?php } ?>
 	</div>
 </div>
 
