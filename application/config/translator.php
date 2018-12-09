@@ -4,6 +4,6 @@
 $config['translator_langDir'] = APPPATH . 'language';
 
 /* c$Where are the language files */
-$config['translator_masterLang'] = 'spanish';
+$config['translator_masterLang'] = 'english';
 
 ?>
